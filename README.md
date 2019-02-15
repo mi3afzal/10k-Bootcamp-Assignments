@@ -1,40 +1,33 @@
 
 # 10k-Bootcamp-Assignments
 PanaCloud Bootcamp.
-
-===================
-
 - - - - 
 
-# Class 1
+# Class 1 - JS
 
 ## Assignment 1 Instructions
- * Using the athleteData array and .map():
- *   - return a string for each item in the array in the following format
- *     <athlete> in <team> earned <income> euros
- *   - store the returned data in a new athleteIncomeStrings variable
+ * Using the `athleteData` array and .map():
+ * return a string for each item in the array in the following format
+ * <athlete> in <team> earned <income> euros
+ * store the returned data in a new athleteIncomeStrings variable
 
 
 ## Assignment 2 Instructions
- * Using the athleteData array and .filter():
- *   - return only athlete objects where the athlete's income is more than
- *     7 characters long
- *   - store the returned data in a new `results` variable
- *
+ * Using the `athleteData` array and .filter():
+ * return only athlete objects where the athlete's income is more than 7 characters long
+ * store the returned data in a new `results` variable
 
 
 ## Assignment 3 Instructions
- * Using the musicData array, .filter, and .map():
- *   - filter the athleteData array down to just the athletes that earn
- *     more than 10,000,000 euros
- *   - on the array returned from .filter(), call .map()
- *   - use .map() to return a string for each item in the array in the
- *     following format: "<athlete> is a great football player"
- *   - store the array returned form .map() in a new "popular" variable
- *
+ * Using the `athleteData ` array, .filter, and .map():
+ * filter the `athleteData` array down to just the athletes that earn more than 10,000,000 euros
+ * on the array returned from .filter(), call .map()
+ * use .map() to return a string for each item in the array in the following format: 
+ * "<athlete> is a great football player"
+ * store the array returned form .map() in a new "popular" variable
 
 
-# Class 2
+# Class 2 - React
 ## Assignment 1 Instructions
 Use React and the `chart`, `peeps`, and `books` data in `App.js` to display a list of people alongside the book they liked.
 
