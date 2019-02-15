@@ -1,10 +1,11 @@
 import React, { Component } from "react";
+import { loginUser } from "../utilities/LoginLocalStorage";
 
 class Dashboard extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			currentUser: JSON.parse(localStorage.getItem("logedinUser")),
+			currentUser: loginUser(),
 			courses: [
 				{ id: 1, title: "React" },
 				{ id: 2, title: "NodeJS" },

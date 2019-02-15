@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import Input from "../Input/Input";
-import "./Login.css";
-import { validateForm } from "./helper";
+import Input from "./Input";
+import "../css/Login.css";
+import { validateForm } from "../utilities/helper";
+import { login } from "../utilities/LoginLocalStorage";
 
 class Login extends Component {
 	constructor(props) {
@@ -80,7 +81,6 @@ class Login extends Component {
 
 		//const validate = validate();
 		const validate = validateForm("all", { username, password });
-		console.log(validate);
 		if (validate.hasError) {
 			this.setState({ errors: validate });
 			return;
@@ -91,10 +91,7 @@ class Login extends Component {
 		});
 
 		if (verifiedUsers.length === 1) {
-			localStorage.setItem(
-				"logedinUser",
-				JSON.stringify(verifiedUsers[0])
-			);
+			login(verifiedUsers[0]);
 			this.props.history.push("/dashboard");
 			/* this.props.history.push({
 				pathname: "/dashboard",
