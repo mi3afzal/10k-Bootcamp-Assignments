@@ -37,7 +37,6 @@ Let's do something a little bit more complicated. Instead of displaying a
 list of users and their movies, this time you need to display a list of movies.
 
 For each book in the list, there are two options:
-
 1. If the book has been liked by any of the peeps, then display a list of all of the peeps who said that they liked that book.
 2. If the book has *not* been liked, display some text stating that no one liked this book.
 
@@ -45,16 +44,36 @@ As you go about tackling this project, try to make the app *modular* by breaking
 
 
 ## Assignment 3 Instructions
+Change the Components from the assignment you made from class components to functional stateless components
+
 
 ## Assignment 4 Instructions
+You're given a starter template with dummy data.
+You will be creating a "ADD THE NUMBERS GAME" in which you will display 
+three random number and proposed answer on the screen. This proposed number 
+could by right answer or could be wrong
+
 
 ## Assignment 5 Instructions
+This exercise all about Controlled Components.
+This app should reflect all the text you typed in input field. If there is nothing in input box, nothing should be printed to the page.
+
 
 ## Assignment 6 Instructions
+This is the running app. You need to modify it to make it modular and do stuff like passing data into 
+components, create Stateless Functional Components where appropriate, add state to components where needed, updating state functionality if state added to component, and create Controlled Components if needed.
+
 
 ## Assignment 7 Instructions
+This is the running app. You need to modify it to make it modular and do stuff like passing data into 
+components, create Stateless Functional Components where appropriate, add state to components where needed, updating state functionality if state added to component, and create Controlled Components if needed.
+
+App should taker user name as input and show the list below as follows
+{user name} has played 0 games.
+
 
 ## Assignment 8 Instructions
+This is the running chat app. You need to modify it to make it modular and do stuff like passing data into components, create Stateless Functional Components where appropriate, add state to components where needed, updating state functionality if state added to component, and create Controlled Components if needed. 
 
 
 
