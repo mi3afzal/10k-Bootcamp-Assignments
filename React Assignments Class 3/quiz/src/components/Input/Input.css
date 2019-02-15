@@ -1,0 +1,16 @@
+.inputContainer {
+	padding: 10px;
+	width: 400px;
+}
+label {
+	display: block;
+}
+.inputWrapper input,
+.inputWrapper label {
+	width: 100%;
+	padding: 5px;
+	height: 1em;
+	min-height: 16px;
+	line-height: 1em;
+	font-size: 1em;
+}
