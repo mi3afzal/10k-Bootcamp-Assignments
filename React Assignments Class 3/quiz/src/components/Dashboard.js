@@ -1,69 +1,12 @@
 import React, { Component } from "react";
-import { loginUser } from "../utilities/LoginLocalStorage";
+import { Link } from "react-router-dom";
+import { loginUser } from "../utilities/AuthStorage";
+import { getQuizData, getUserCoursesObj } from "../utilities/QuizStorage";
 
 class Dashboard extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			currentUser: loginUser(),
-			courses: [
-				{ id: 1, title: "React" },
-				{ id: 2, title: "NodeJS" },
-				{ id: 3, title: "Kubernetes" }
-			],
-			quizzes: [
-				{
-					id: 1,
-					courseID: 1,
-					quiz_title: "React quiz 1",
-					proctKey: "react1"
-				},
-				{
-					id: 2,
-					courseID: 1,
-					quiz_title: "React quiz 2",
-					proctKey: "react2"
-				},
-				{
-					id: 3,
-					courseID: 1,
-					quiz_title: "React quiz 3",
-					proctKey: "react3"
-				},
-				{
-					id: 4,
-					courseID: 2,
-					quiz_title: "NodeJS quiz 1",
-					proctKey: "node1"
-				},
-				{
-					id: 5,
-					courseID: 2,
-					quiz_title: "NodeJS quiz 2",
-					proctKey: "node2"
-				},
-				{
-					id: 6,
-					courseID: 3,
-					quiz_title: "Kubernetes quiz 1",
-					proctKey: "kube1"
-				}
-			],
-			userAllowedQuizzes: [
-				{
-					id: 1,
-					userID: 1,
-					courseID: [1, 2, 3],
-					quizzes: [{ id: 1, marks: null }, { id: 2, marks: null }]
-				},
-				{
-					id: 2,
-					userID: 2,
-					courseID: [1, 2],
-					quizzes: [{ id: 1, marks: null }, { id: 2, marks: null }]
-				}
-			]
-		};
+		this.state = {};
 		/* if (this.props.location.state) {
 			if (!this.props.location.state.isAuth) {
 				this.props.history.push("/");
@@ -73,15 +16,37 @@ class Dashboard extends Component {
 		} */
 	}
 	render() {
-		const { courses } = this.state;
+		const currentUser = loginUser();
+		const { courses, quizzes } = getQuizData();
+		const allowedCourses = getUserCoursesObj(currentUser.id).courseID;
+
+		//console.log(allowedCourses);
+
 		return (
 			<div>
 				<h1>Dashboard</h1>
 				<h3>Courses</h3>
 				<ul>
-					{courses.map(course => (
-						<li key={course.id}>{course.title}</li>
-					))}
+					{courses
+						.filter(course => allowedCourses.includes(course.id))
+						.map(course => (
+							<li key={course.id}>
+								{course.title}
+								<ul>
+									{quizzes
+										.filter(
+											quiz => quiz.courseID === course.id
+										)
+										.map(quiz => (
+											<li key={quiz.id}>
+												<Link to={"/quiz/" + quiz.id}>
+													{quiz.quiz_title}
+												</Link>
+											</li>
+										))}
+								</ul>
+							</li>
+						))}
 				</ul>
 			</div>
 		);

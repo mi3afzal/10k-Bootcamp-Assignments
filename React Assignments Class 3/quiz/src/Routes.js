@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { BrowserRouter, Route, Switch, Redirect, Link } from "react-router-dom";
 import Login from "./components/Login";
 import Dashboard from "./components/Dashboard";
-import { isLogin, logout } from "./utilities/LoginLocalStorage";
+import { isLogin, logout } from "./utilities/AuthStorage";
+import Quiz from "./components/Quiz";
 
 class Router extends Component {
 	render() {
@@ -23,6 +24,11 @@ class Router extends Component {
 							component={Dashboard}
 						/>
 						<PrivateRoute exact path="/logout" component={Logout} />
+						<PrivateRoute
+							exact
+							path="/quiz/:quizId"
+							component={Quiz}
+						/>
 					</Switch>
 				</div>
 			</BrowserRouter>
@@ -66,9 +72,6 @@ const Navbar = () => {
 				<ul>
 					<li>
 						<Link to="/dashboard">Home</Link>
-					</li>
-					<li>
-						<Link to="/about">Exams History</Link>
 					</li>
 					<li>
 						<Link to="/logout">Logout</Link>

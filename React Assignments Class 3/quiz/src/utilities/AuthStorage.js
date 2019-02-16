@@ -1,3 +1,8 @@
+export const USERS_OBJECT = [
+	{ id: 1, username: "admin", password: "irfan" },
+	{ id: 2, username: "irfan", password: "admin" }
+];
+
 const LOGIN_KEY = "LoggedinUser";
 
 export const login = userObj => {

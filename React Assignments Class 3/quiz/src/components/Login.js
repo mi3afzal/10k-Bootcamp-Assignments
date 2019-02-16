@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import Input from "./Input";
 import "../css/Login.css";
-import { validateForm } from "../utilities/helper";
-import { login } from "../utilities/LoginLocalStorage";
+import { validateForm } from "../utilities/Helper";
+import { USERS_OBJECT, login } from "../utilities/AuthStorage";
 
 class Login extends Component {
 	constructor(props) {
@@ -13,10 +13,7 @@ class Login extends Component {
 		}
 
 		this.state = {
-			users: [
-				{ id: 1, username: "admin", password: "irfan" },
-				{ id: 2, username: "irfan", password: "admin" }
-			],
+			users: USERS_OBJECT,
 			username: "",
 			password: "",
 			isAuth: false,
