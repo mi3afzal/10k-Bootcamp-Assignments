@@ -4,7 +4,7 @@ const QUIZ_DATA_OBJECT = {
 			id: 1,
 			userID: 1,
 			courseID: [1, 2, 3],
-			quizzes: [{ id: 1, marks: null }, { id: 2, marks: null }]
+			quizzes: [{ id: 3, marks: null }, { id: 2, marks: null }]
 		},
 		{
 			id: 2,
@@ -59,25 +59,25 @@ const QUIZ_DATA_OBJECT = {
 	questions: [
 		{
 			id: 0,
-			quizID: 0,
+			quizID: 1,
 			question: "What is true about react?",
 			answers: [
-				{ id: 0, answer: "React is framework" },
-				{ id: 1, answer: "React is machine language" },
-				{ id: 2, answer: "React is JS library" }
+				{ id: 1, answer: "React is framework" },
+				{ id: 2, answer: "React is machine language" },
+				{ id: 3, answer: "React is JS library" }
 			],
-			correctAns: [2],
+			correctAns: [3],
 			multipleAns: false
 		},
 		{
 			id: 1,
-			quizID: 0,
+			quizID: 1,
 			question: "Data in React is?",
 			answers: [
-				{ id: 0, answer: "BiDirectional" },
-				{ id: 1, answer: "UniDirectional" }
+				{ id: 1, answer: "BiDirectional" },
+				{ id: 2, answer: "UniDirectional" }
 			],
-			correctAns: [1],
+			correctAns: [2],
 			multipleAns: false
 		}
 	]
@@ -93,20 +93,71 @@ export const getQuizData = () => {
 	return JSON.parse(localStorage.getItem(Quiz_KEY));
 };
 
+export const removeQuizData = () => {
+	localStorage.removeItem(Quiz_KEY);
+};
+
 export const getQuizDataByIndex = index => {
 	let data = JSON.parse(localStorage.getItem(Quiz_KEY));
 	return data[index];
 };
 
-export const getUserCoursesObj = userID => {
-	const userAllowedCourses = getQuizDataByIndex("userAllowedCourses");
-	return userAllowedCourses.filter(userObj => userObj.userID === userID)[0];
-};
-
-export const removeQuizData = () => {
-	localStorage.removeItem(Quiz_KEY);
-};
-
+// Save default Quiz data into localStorage on first visit
 if (!localStorage.getItem(Quiz_KEY)) {
 	setQuizData(QUIZ_DATA_OBJECT);
 }
+
+// APIs
+export const getUserCoursesObj = userID => {
+	const dataIndex = getQuizDataByIndex("userAllowedCourses");
+	return dataIndex.find(obj => obj.userID === userID);
+};
+
+export const getQuizObj = quizID => {
+	quizID = Number(quizID);
+	const dataIndex = getQuizDataByIndex("quizzes");
+	return dataIndex.find(obj => obj.id === quizID);
+};
+
+export const getQuestions = quizID => {
+	quizID = Number(quizID);
+	const dataIndex = getQuizDataByIndex("questions");
+	return dataIndex.filter(obj => obj.quizID === quizID);
+};
+
+export const updateUserMarks = (userID, quizID, marks) => {
+	userID = Number(userID);
+	quizID = Number(quizID);
+	let data = getQuizData();
+
+	const userIndex = data.userAllowedCourses.findIndex(
+		obj => obj.userID === userID
+	);
+	if (userIndex === -1) return false;
+
+	const quizIndex = data.userAllowedCourses[userIndex].quizzes.findIndex(
+		obj => obj.id === quizID
+	);
+
+	if (quizIndex === -1)
+		data.userAllowedCourses[userIndex].quizzes.push({
+			id: quizID,
+			marks: marks
+		});
+	else data.userAllowedCourses[userIndex].quizzes[quizIndex].marks = marks;
+	setQuizData(data);
+	return true;
+};
+
+// quiz Progress storage
+const QUIZ_PROGRESS_KEY = "quizProgress_";
+export const setQuizProgressData = (quizID, quizProgressDataObj) => {
+	localStorage.setItem(
+		QUIZ_PROGRESS_KEY + quizID,
+		JSON.stringify(quizProgressDataObj)
+	);
+};
+
+export const getQuizProgressData = quizID => {
+	return JSON.parse(localStorage.getItem(QUIZ_PROGRESS_KEY + quizID));
+};

@@ -35,9 +35,9 @@ function validateForm(check, data, field, err) {
 
 	if (check === "all") {
 		for (var i in Validation) {
-			var conArray = Validation[i].Validate;
+			let conArray = Validation[i].Validate;
 			errors.errorsObj[i] = { message: [] };
-			for (var j = 0; j < conArray.length; j++) {
+			for (let j = 0; j < conArray.length; j++) {
 				if (conArray[j].condition) {
 					errors.errorsObj[i].message.push(conArray[j].message);
 				}
@@ -52,10 +52,10 @@ function validateForm(check, data, field, err) {
 	}
 
 	if (check === "each") {
-		var conArray = Validation[field].Validate;
+		let conArray = Validation[field].Validate;
 		errors.errorsObj[field] = { message: [] };
 
-		for (var j = 0; j < conArray.length; j++) {
+		for (let j = 0; j < conArray.length; j++) {
 			if (conArray[j].condition) {
 				errors.errorsObj[field].message.push(conArray[j].message);
 			}
