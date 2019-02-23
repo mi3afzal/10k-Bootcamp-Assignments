@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>Redux ToDo / Movie List</title>
+		<script src="index.js"></script>
+	</head>
+	<body>
+		<h2>ToDo List</h2>
+		<input id="task_input" type="text" placeholder="Type your task here." />
+		<button id="task_button" onclick="add_item('task')">Add Task</button>
+		<ol id="task_list"></ol>
+
+		<hr />
+		<h2>Movie List</h2>
+		<input
+			id="movie_input"
+			type="text"
+			placeholder="Type your task here."
+		/>
+		<button id="movie_button" onclick="add_item('movie')">Add Task</button>
+		<ol id="movie_list"></ol>
+	</body>
+</html>
