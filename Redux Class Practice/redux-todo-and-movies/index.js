@@ -40,15 +40,15 @@ function movie_reducer(state = [], action) {
 	}
 }
 
-function root_reducer(state = { task: [], movie: [] }, action) {
+/* function root_reducer(state = { task: [], movie: [] }, action) {
 	return {
 		task: task_reducer(state.task, action),
 		movie: movie_reducer(state.movie, action)
 	};
-}
+} */
 
 // main Store
-function createStore(reducer) {
+/* function createStore(reducer) {
 	let state;
 
 	let listenersArray = [];
@@ -73,9 +73,15 @@ function createStore(reducer) {
 		subscribe,
 		dispatch
 	};
-}
+} */
 
-const store = createStore(root_reducer);
+//const store = createStore(root_reducer);
+const store = Redux.createStore(
+	Redux.combineReducers({
+		task: task_reducer,
+		movie: movie_reducer
+	})
+);
 
 // Subscribes
 unsubscribe = store.subscribe(() => {
