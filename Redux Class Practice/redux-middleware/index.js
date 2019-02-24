@@ -142,7 +142,7 @@ function add_item(index) {
 		return false;
 	}
 	input.value = "";
-	store.dispatch({
+	validateDispatch(store, {
 		type: index === "task" ? CREATE_TASK : CREATE_MOVIE,
 		task: {
 			id: generateId(),
