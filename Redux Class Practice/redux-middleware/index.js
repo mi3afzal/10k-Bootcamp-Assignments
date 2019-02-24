@@ -75,15 +75,8 @@ function movie_reducer(state = [], action) {
 	};
 } */
 
-//const store = createStore(root_reducer);
-const store = Redux.createStore(
-	Redux.combineReducers({
-		task: task_reducer,
-		movie: movie_reducer
-	})
-);
-
-function validateDispatch(store, action) {
+// custom middleware
+/* function validateDispatch(store, action) {
 	if (
 		action.type === CREATE_TASK &&
 		action.task.name.toLowerCase().includes("pizza")
@@ -91,7 +84,42 @@ function validateDispatch(store, action) {
 		return alert("Pizza is not allowed, you are on diet!");
 	}
 	return store.dispatch(action);
-}
+} */
+
+// Redux middleware
+/* function middlewareChecker(store) {
+	return function(next) {
+		return function(action) {
+			if (
+				action.type === CREATE_TASK &&
+				action.task.name.toLowerCase().includes("pizza")
+			) {
+				return alert("Pizza is not allowed, you are on diet!");
+			}
+			return next(action);
+		};
+	};
+} */
+
+// Redux middleware ES6
+const middlewareChecker = store => next => action => {
+	if (
+		action.type === CREATE_TASK &&
+		action.task.name.toLowerCase().includes("pizza")
+	) {
+		return alert("Pizza is not allowed, you are on diet!");
+	}
+	return next(action);
+};
+
+//const store = createStore(root_reducer);
+const store = Redux.createStore(
+	Redux.combineReducers({
+		task: task_reducer,
+		movie: movie_reducer
+	}),
+	Redux.applyMiddleware(middlewareChecker)
+);
 
 // Subscribes
 unsubscribe = store.subscribe(() => {
@@ -142,7 +170,17 @@ function add_item(index) {
 		return false;
 	}
 	input.value = "";
-	validateDispatch(store, {
+	// for custome middleware
+	/* validateDispatch(store, { 
+		type: index === "task" ? CREATE_TASK : CREATE_MOVIE,
+		task: {
+			id: generateId(),
+			name: value,
+			done: false
+		}
+	}); */
+
+	store.dispatch({
 		type: index === "task" ? CREATE_TASK : CREATE_MOVIE,
 		task: {
 			id: generateId(),
