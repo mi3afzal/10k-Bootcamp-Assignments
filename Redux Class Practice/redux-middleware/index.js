@@ -111,6 +111,17 @@ const middlewareChecker = store => next => action => {
 	}
 	return next(action);
 };
+const logger = store => next => action => {
+	console.group(action.type);
+	console.time("Time to complete transaction");
+	console.log("App current state: ", store.getState());
+	console.log("Action dispatched: ", action);
+	const response = next(action);
+	console.log("App updated state: ", store.getState());
+	console.timeEnd("Time to complete transaction");
+	console.groupEnd();
+	return response;
+};
 
 //const store = createStore(root_reducer);
 const store = Redux.createStore(
@@ -118,7 +129,7 @@ const store = Redux.createStore(
 		task: task_reducer,
 		movie: movie_reducer
 	}),
-	Redux.applyMiddleware(middlewareChecker)
+	Redux.applyMiddleware(middlewareChecker, logger)
 );
 
 // Subscribes
