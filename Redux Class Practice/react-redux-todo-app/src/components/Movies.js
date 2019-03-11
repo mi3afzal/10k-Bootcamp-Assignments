@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import List from "./List";
+import { connect } from "react-redux";
 import {
 	createMovieAction,
 	toggleMovieAction,
@@ -7,25 +8,6 @@ import {
 } from "../actions/movies";
 
 class Movies extends Component {
-	add_item = () => {
-		const input = document.getElementById("movie_input");
-		const value = input.value;
-		if (value === "") {
-			input.focus();
-			alert("Please enter movie name");
-			return false;
-		}
-		input.value = "";
-
-		this.props.dispatch(createMovieAction(value));
-	};
-	delete_item = id => {
-		this.props.dispatch(deleteMovieAction(id));
-	};
-	toggle_item = id => {
-		this.props.dispatch(toggleMovieAction(id));
-	};
-
 	render() {
 		return (
 			<div>
@@ -35,17 +17,47 @@ class Movies extends Component {
 					type="text"
 					placeholder="Type movie name here."
 				/>
-				<button id="movie_button" onClick={this.add_item}>
+				<button id="movie_button" onClick={this.props.add_item}>
 					Add Movie
 				</button>
 				<List
 					items={this.props.movie}
-					toggle={this.toggle_item}
-					delete={this.delete_item}
+					toggle={this.props.toggle_item}
+					delete={this.props.delete_item}
 				/>
 			</div>
 		);
 	}
 }
 
-export default Movies;
+const mapStateToProps = state => {
+	return {
+		movie: state.movie
+	};
+};
+const mapDispatchToProps = dispatch => ({
+	add_item: () => {
+		const input = document.getElementById("movie_input");
+		const value = input.value;
+		if (value === "") {
+			input.focus();
+			alert("Please enter movie name");
+			return false;
+		}
+		input.value = "";
+
+		dispatch(createMovieAction(value));
+	},
+	delete_item: id => {
+		dispatch(deleteMovieAction(id));
+	},
+	toggle_item: id => {
+		dispatch(toggleMovieAction(id));
+	}
+});
+
+//export default Movies;
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(Movies);

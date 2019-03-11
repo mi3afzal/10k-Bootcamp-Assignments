@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import List from "./List";
+import { connect } from "react-redux";
 import {
 	createTaskAction,
 	toggleTaskAction,
@@ -48,4 +49,16 @@ class Tasks extends Component {
 	}
 }
 
-export default Tasks;
+const mapStateToProps = state => {
+	return {
+		task: state.task
+	};
+};
+const mapDispatchToProps = dispatch => ({
+	dispatch: dispatch
+});
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(Tasks);
