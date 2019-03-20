@@ -11,6 +11,9 @@ class App extends Component {
 	}
 	render() {
 		//const { task, movie } = this.props.store.getState();
+		if (this.props.Loading) {
+			return <h1>Page is loading</h1>;
+		}
 		return (
 			<div className="App">
 				<h1>Todo Movies App</h1>
@@ -24,7 +27,7 @@ class App extends Component {
 	}
 }
 
-export default connect()(App);
+export default connect(state => ({ Loading: state.Loading }))(App);
 
 /*
 Redux 
