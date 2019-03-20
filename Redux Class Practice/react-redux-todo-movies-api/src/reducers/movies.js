@@ -1,4 +1,5 @@
 import { CREATE_MOVIE, TOGGLE_MOVIE, DELETE_MOVIE } from "../actions/movies";
+import { INITIAL_DATA } from "../actions";
 
 export default function movie_reducer(state = [], action) {
 	switch (action.type) {
@@ -11,7 +12,10 @@ export default function movie_reducer(state = [], action) {
 			);
 
 		case CREATE_MOVIE:
-			return state.concat([action.task]);
+			return state.concat([action.movie]);
+
+		case INITIAL_DATA:
+			return action.movies;
 
 		default:
 			return state;

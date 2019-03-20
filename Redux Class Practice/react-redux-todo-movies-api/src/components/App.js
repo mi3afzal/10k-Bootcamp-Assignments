@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import Tasks from "./Tasks";
 import Movies from "./Movies";
+import { connect } from "react-redux";
+import { fetchInitialData } from "../actions";
 
 class App extends Component {
-	/* componentDidMount() {
-		this.props.store.subscribe(() => this.forceUpdate());
-	} */
+	componentDidMount() {
+		//this.props.store.subscribe(() => this.forceUpdate());
+		this.props.dispatch(fetchInitialData());
+	}
 	render() {
 		//const { task, movie } = this.props.store.getState();
 		return (
@@ -21,7 +24,7 @@ class App extends Component {
 	}
 }
 
-export default App;
+export default connect()(App);
 
 /*
 Redux 
@@ -47,4 +50,13 @@ React-Redux
 2) connect -> wrappe component.
 	i) mapStateToProps -> send state to component on every change.
 	ii) mapDispatchToProps -> add dispatch to component.
+
+
+Redux-thunk
+1) add thunk as middleware 
+2) add data_api to index file. so we can use it as API in js code.
+3) create a high order function which will get responce from API and dispatch action.
+	thunk as a middleware will handle this high order function
+4) handle dispatched action in reducers.
+
 */

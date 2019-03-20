@@ -30,7 +30,7 @@ class Tasks extends Component {
 	render() {
 		return (
 			<div>
-				<h1>Movies to watch</h1>
+				<h1>Tasks to do</h1>
 				<input
 					id="task_input"
 					type="text"
